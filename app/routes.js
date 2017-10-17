@@ -17,18 +17,18 @@ module.exports = function(app, passport) {
     
     // estimation
     app.get('/estimation', function(req, res) {
-        var data;
         Products.find({},function(err,data){
             if (err){
                 console.log("error", err);
             }
             else{
-                console.log(data);                
+                // console.log(data);                
                 console.log("not error", data);
-                data=data;
+
             }
+            res.render('estimation.ejs', {newdata: data}); // load the estimation.ejs file
+            
         })
-        res.render('estimation.ejs',{ data: data }); // load the estimation.ejs file
     });
 
      // about
