@@ -1,0 +1,129 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Titan Interiors</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <!-- load fontawesome -->
+</head>
+
+<style>
+
+</style>
+
+<body style="
+    background-color: #9d9d9d;
+    ">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid" style="
+        padding-right:0px;
+        padding-left:0px;
+        ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span> 
+                </button>
+                <img src="/images/logo.png" style="
+                height: 80px;
+                width: 300px;
+            ">
+            </div>
+            <div class="collapse navbar-collapse" id="MyNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/" style="
+                    font-size: x-large;
+                    padding-bottom: 5px;
+                    top: 40px;
+                    left: 40px;
+                ">Home</a></li>
+                    <li><a href="#" style="
+                    font-size: x-large;
+                    padding-bottom: 5px;
+                    top: 40px;
+                    left: 40px;
+                ">Products</a></li>
+                    <li><a href="#" style="
+                    font-size: x-large;
+                    padding-bottom: 5px;
+                    top: 40px;
+                    left: 40px;
+                ">VR</a></li>
+                    <li><a href="/contacts" style="
+                    font-size: x-large;
+                    padding-bottom: 5px;
+                    top: 40px;
+                    left: 40px;
+                ">Contacts</a></li>
+                    <li><a href="#" style="
+                    font-size: x-large;
+                    padding-bottom: 5px;
+                    top: 40px;
+                    left: 40px;
+                ">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/signup" style="
+              font-size: large;
+              padding-right: 15px;
+          "><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li class="active"><a href="/login" style="
+              font-size: large;
+              background-color:#222222;
+              padding-right: 40px;
+              padding-left: 0px;
+          "><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <h1><span class="fa fa-sign-in"></span> Login</h1>
+
+            <!-- show any messages that come back with authentication -->
+            <% if (message.length > 0) { %>
+                <div class="alert alert-danger">
+                    <%= message %>
+                </div>
+                <% } %>
+
+                    <!-- LOGIN FORM -->
+                    <form action="/login" method="post">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+                    </form>
+
+                    <hr>
+
+                    <p>Need an account? <a href="/signup">Signup</a></p>
+                    <p>Or go <a href="/">home</a>.</p>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

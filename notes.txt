@@ -1,0 +1,19 @@
+   <!-- <script>
+    $.ajax({
+        type: "GET",
+        url: "/estimation"
+    }).done(function(data)
+{
+
+    console.log(data);
+    console.log("data");
+})
+    
+    </script> -->
+
+    
+<script type='text/javascript'>
+console.log("------------------------------------");
+    var rows =<%-JSON.stringify(data)%>
+ console.log("Rowws ",rows);
+  </script>
