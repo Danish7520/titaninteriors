@@ -17,16 +17,17 @@ module.exports = function(app, passport) {
     
     // estimation
     app.get('/estimation', function(req, res) {
-        Products.find({},function(err,data){
+        Products.find({Type:"Wall"},function(err,_products){
             if (err){
                 console.log("error", err);
             }
             else{
                 // console.log(data);                
-                console.log("not error", data);
+                console.log("not error", _products);
 
             }
-            res.render('estimation.ejs', {newdata: data}); // load the estimation.ejs file
+            console.log("This is new data ",_products);
+            res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
             
         })
     });

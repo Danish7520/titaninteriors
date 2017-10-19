@@ -11,12 +11,10 @@
 </head>
 
 <style>
-     html{
-    overflow-x: hidden;
-  }
+    html {
+        overflow-x: hidden;
+    }
     /* estimation_area */
-
-    
     /* end_estimation_area */
 </style>
 
@@ -89,176 +87,94 @@ background-color: #9d9d9d;
         </div>
     </nav>
 
-   
+
     <!-- estimation-area -->
     <div class="row">
         <!-- estimation -->
-            <div class="col-md-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Get Estimates</div>
-                    <div class="panel-body">
-                        <div class="estimate">
-                            
-                            <!-- /<%= newdata %> -->
-                                
-                            <% newdata.forEach(function(bean) { %>
-                                <tr> 
-                                    <td><%= bean.name %></td> 
-                                    <br/>
-                                    <td><%= bean.Type %></td>
-                                </tr> 
-                            <% }); %>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Get Estimates</div>
+                <div class="panel-body">
+                    <div class="estimate">
 
-                            <form>
-                                <div class="radio-btn">
-                                    <div class="radio">
-                                           <label><input type="radio" name="optradio">Wall</label>
-                                    </div>
-                                    <div class="radio">
-                                           <label><input type="radio" name="optradio">Window</label>
-                                    </div>
-                                    <div class="radio">
-                                           <label><input type="radio" name="optradio">Floor</label>
-                                    </div>
-                                </div>  
-                                    <div class="input-group"> 
-                                        <input type="number" min="0" class="form-control" placeholder="width">
-                                        <input type="number" min="0" class="form-control" placeholder="Height">
-                                        <div>
-                                        <input type="submit" class="btn btn-info" value="Enter" >
-                                        </div>
-                                    </div>
-                            </form>
-                        </div>
+                        <!-- /<%= newdata %> -->
+
+
+
+                        <form>
+                            <div class="radio-btn">
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio">Wall</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio">Window</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio">Floor</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" min="0" class="form-control" placeholder="width">
+                                <input type="number" min="0" class="form-control" placeholder="Height">
+                                <div>
+                                    <input type="submit" class="btn btn-info" value="Enter">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
+                </div>
             </div>
+        </div>
         <!-- end estimation -->
         <!-- products -->
         <div class="col-md-5">
-            <div  class="row">
+            <div class="row">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Select Product</div>
+                    <div class="panel-heading">Select Products</div>
                     <div class="panel-body">
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Wallpapers</div>
-                                <div class="panel-body">
-                                    <div class="wall-paper-heading">
-                                        <div class="collapse-1">
-                                        <div class="panel-group" id="accordion1">
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                                                      Wallpaper Type 1</a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse1" class="panel-collapse collapse ">
-                                                    <div class="panel-body">
-                                                            <div class="thumbnail">
-                                                                    <a href="/images/wallpapers.jpg" target="_blank">
-                                                                      <img src="/images/wallpapers.jpg" alt="Lights" style="width:100%">
-                                                                      <div class="caption">
-                                                                        <p>jsdgfuhdr jbfjur jrbfujr vburrjbvrjebjrbj v.</p>
-                                                                      </div>
-                                                                    </a>
-                                                                  </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse2">
-                                                        Wallpaper Type 2</a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse2" class="panel-collapse collapse">
-                                                    <div class="panel-body">Wallpaper Description 2</div>
-                                                  </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse3">
-                                                        Wallpaper Type 3</a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse3" class="panel-collapse collapse">
-                                                    <div class="panel-body">Wallpaper Description 3</div>
-                                                  </div>
-                                                </div>
+                        <%  newdata.forEach(function(Product) { %>
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <%= Product.name %>
+                                    </div>
+                                    <div class="panel-body">
+                                        <%  Product.Categories.forEach(function(Category) { %>
+                                        <div class="panel-group" id="accordion">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                  <a data-toggle="collapse" data-parent="#accordion" href=<%="#"+Category.name %>>
+                                                    <%= Category.name %></a>
+                                                </h4>
+                                              </div>
+                                              <div id=<%= Category.name %> class="panel-collapse collapse in">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                                commodo consequat.</div>
                                               </div>
                                             </div>
+
+                                          </div>
+                                          <% }); %>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">PVC</div>
-                                <div class="panel-body">
-                                    <!-- catagories -->
-                                    <div class="wall-pvc-heading">
-                                        <div class="collapse-2">
-                                        <div class="panel-group" id="accordion2">
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
-                                                        PVC Type 1</a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse4" class="panel-collapse collapse ">
-                                                    <div class="panel-body" > PVC Description 1</div>
-                                                  </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse5">
-                                                        PVC Type 2</a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse5" class="panel-collapse collapse">
-                                                    <div class="panel-body"> PVC Description 2</div>
-                                                  </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
-                                                      PVC Type 3</a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse6" class="panel-collapse collapse">
-                                                    <div class="panel-body"> PVC Description 3</div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                    </div>
-                                    <!-- end catagories -->
-                                                                
-                                    
-                                </div>
-                              </div>
-                            
-                        </div>
-                    </div>
-                  </div>
+                        <% }); %>
+                    </di>
+                </div>
             </div>
         </div>
 
-         <!-- end products -->
+        <!-- end products -->
         <!-- virtual reality -->
         <div class="col-md-5">
         </div>
         <!-- end virtual reality -->
     </div>
     <!--end estimation-area -->
-   
+
 
 
 

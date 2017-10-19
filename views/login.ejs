@@ -126,4 +126,58 @@
     </div>
 </body>
 
-</html>
+</html><div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">Select Product</div>
+        <div class="panel-body">
+            <%  newdata.forEach(function(Product) { %>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Wallpapers</div>
+                        <div class="panel-body">
+                            <div class="wall-paper-heading">
+                                <div class="collapse-1">
+                                    <div class="panel-group" id="accordion1">
+                                        <%  Product.Categories.forEach(function(category) { %>
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                                                            <%= category.name %>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1" class="panel-collapse collapse ">
+                                                    <div class="panel-body">
+                                                        <div class="thumbnail">
+                                                            <a href="/images/wallpapers.jpg" target="_blank">
+                                                                          <img src="/images/wallpapers.jpg" alt="Lights" style="width:100%">
+                                                                          <div class="caption">
+                                                                            <p>jsdgfuhdr jbfjur jrbfujr vburrjbvrjebjrbj v.</p>
+                                                                          </div>
+                                                                        </a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% }); %>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+                    <!-- end catagories -->
+
+
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
