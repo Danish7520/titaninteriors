@@ -36,6 +36,65 @@ module.exports = function(app, passport) {
      app.get('/about', function(req, res) {
         res.render('about.ejs'); // load the about.ejs file
     });
+    
+    /// Wall
+    app.get("/Wall",function(req,res){
+        console.log("abcd")
+        Products.find({Type:"Wall"},function(err,_products){
+            if (err){
+                console.log("error", err);
+            }
+            else{
+                // console.log(data);                
+                console.log("not error", _products);
+
+            }
+            console.log("This is new data ",_products);
+            res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+             //res.json(_products)
+        })
+        // res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+       
+    })
+
+     /// Window
+     app.get("/Window",function(req,res){
+        console.log("abcd")
+        Products.find({Type:"Window"},function(err,_products){
+            if (err){
+                console.log("error", err);
+            }
+            else{
+                // console.log(data);                
+                console.log("not error", _products);
+
+            }
+            console.log("This is new data ",_products);
+             res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+            //res.json(_products)
+            //res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+        })
+       
+    })
+
+     /// Floor
+     app.get("/Floor",function(req,res){
+        console.log("abcd")
+        Products.find({Type:"Floor"},function(err,_Floor){
+            if (err){
+                console.log("error", err);
+            }
+            else{
+                // console.log(data);                
+                console.log("not error", _Floor);
+
+            }
+            console.log("This is new data ",_Floor);
+             res.render('estimation.ejs', {newdata: _Floor}); // load the estimation.ejs file
+            //res.json(_Floor)
+        })
+       
+    })
 
 
     

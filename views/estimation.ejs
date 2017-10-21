@@ -104,13 +104,13 @@ background-color: #9d9d9d;
                         <form>
                             <div class="radio-btn">
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio">Wall</label>
+                                    <label><input type="radio" name="optradio" onclick="Wall()" checked>Wall</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio">Window</label>
+                                    <label><input type="radio" name="optradio" onclick="Window()">Window</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio">Floor</label>
+                                    <label><input type="radio" name="optradio" onclick="Floor()">Floor</label>
                                 </div>
                             </div>
                             <div class="input-group">
@@ -126,8 +126,59 @@ background-color: #9d9d9d;
             </div>
         </div>
         <script>
-        function abc(name){
-            console.log("ooooooooooooooooooooooo",name)
+        function Wall(){
+            console.log("oooooo")
+            $.ajax({
+                tyoe:"GET",
+                url:"/Wall"
+                
+            })
+            .done(function(data){
+ console.log("done",data)
+ $('html').replaceWith(data);
+
+            })
+            .fail(function(){
+                
+            });
+
+        }
+        function Window(){
+            console.log("ooooo1")
+            $.ajax({
+                tyoe:"GET",
+                url:"/Window"
+                
+            })
+            .done(function(data){
+ console.log("done",data)
+ $('html').replaceWith(data);
+
+
+            })
+            .fail(function(){
+                
+            });
+
+
+        }
+        function Floor(){
+            console.log("ooooo2")
+            $.ajax({
+                tyoe:"GET",
+                url:"/Floor"
+                
+            })
+            .done(function(data){
+ console.log("done",data)
+ $('html').replaceWith(data);
+
+
+            })
+            .fail(function(){
+                
+            });
+
 
         }
         </script>
@@ -138,7 +189,8 @@ background-color: #9d9d9d;
                 <div class="panel panel-default">
                     <div class="panel-heading">Select Products</div>
                     <div class="panel-body">
-                        <%  newdata.forEach(function(Product) { %>
+                        <%  console.log("jjjjjjjjjjjjjjjjjjjj",newdata);
+                        newdata.forEach(function(Product) { %>
                             <div class="col-md-6" >
                                 <div class="panel panel-default" >
                                     <div class="panel-heading">
