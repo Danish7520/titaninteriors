@@ -14,6 +14,11 @@ module.exports = function(app, passport) {
     app.get('/contacts', function(req, res) {
         res.render('contacts.ejs'); // load the contacts.ejs file
     });
+
+     // Products
+     app.get('/Products', function(req, res) {
+        res.render('Products.ejs'); // load the products.ejs file
+    });
     
     // estimation
     app.get('/estimation', function(req, res) {
@@ -27,7 +32,7 @@ module.exports = function(app, passport) {
 
             }
             console.log("This is new data ",_products);
-            res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+            res.render('estimation.ejs'); // load the estimation.ejs file
             
         })
     });
@@ -50,8 +55,8 @@ module.exports = function(app, passport) {
 
             }
             console.log("This is new data ",_products);
-            res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
-             //res.json(_products)
+           // res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+             res.json(_products)
         })
         // res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
        
@@ -70,8 +75,8 @@ module.exports = function(app, passport) {
 
             }
             console.log("This is new data ",_products);
-             res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
-            //res.json(_products)
+            // res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
+            res.json(_products)
             //res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
         })
        
@@ -90,8 +95,8 @@ module.exports = function(app, passport) {
 
             }
             console.log("This is new data ",_Floor);
-             res.render('estimation.ejs', {newdata: _Floor}); // load the estimation.ejs file
-            //res.json(_Floor)
+            // res.render('estimation.ejs', {newdata: _Floor}); // load the estimation.ejs file
+            res.json(_Floor)
         })
        
     })
