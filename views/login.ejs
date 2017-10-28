@@ -1,5 +1,5 @@
 <!-- views/login.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,298 +10,102 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <!-- load fontawesome -->
 </head>
 
 <style>
- 
-  .carousel-inner img {
-    width: 45%;
-    /* Set width to 50% */
-    margin: auto;
-    height: 550px;
-    padding-top: 25px;
-    padding-bottom: 5px;
-  }
-
-  .carousel-caption h3 {
-    color: #fff !important;
-  }
-
-  .act {
-    color: #fff;
-    background-color: #222222;
-  }
-
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none;
-      /* Hide the carousel text when the screen is less than 600 pixels wide */
+    html {
+        overflow-x: hidden;
     }
-  }
+    /* estimation_area */
+    /* end_estimation_area */
 </style>
 
 <body style="
 background-color: #9d9d9d;
 ">
-  <nav class="navbar navbar-inverse ">
-    <div class="container-fluid" style="
+    <nav class="navbar navbar-inverse ">
+        <div class="container-fluid" style="
     padding-right:0px;
     padding-left:0px;
     ">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span> 
             </button>
-        <img src="../images/logo.png" style="
+                <img src="../images/logo.png" style="
             height: 80px;
             width: 300px;
         ">
-      </div>
-      <div class="collapse navbar-collapse" id="MyNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="/" style="
-            font-size: 20px;
+            </div>
+            <div class="collapse navbar-collapse" id="MyNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/" style="
+                font-size: 20px;
                 background-color:#222222;
                 padding-bottom: 5px;
                 top: 40px;
                 left: 40px;
             ">Home</a></li>
-          <li><a href="/estimation" style="
+                    <li ><a href="/estimation" style="
             font-size: 20px;
+                background-color:#222222;
                 padding-bottom: 5px;
                 top: 40px;
                 left: 40px;
             ">Estimation</a></li>
-          <li><a href="#" style="
+                    <li><a href="#" style="
             font-size: 20px;
                 padding-bottom: 5px;
                 top: 40px;
                 left: 40px;
             ">VR</a></li>
-          <li><a href="/contacts" style="
+                    <li><a href="/contacts" style="
             font-size: 20px;
                 padding-bottom: 5px;
                 top: 40px;
                 left: 40px;
             ">Contacts</a></li>
-          <li><a href="/about" style="
+                    <li><a href="/about" style="
             font-size: 20px;
                 padding-bottom: 5px;
                 top: 40px;
                 left: 40px;
             ">About</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/signup" style="
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a href="/signup" style="
             font-size: 17px;
-            background-color:#222222;
+            
           padding-right: 15px;
       "><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li class="active"><a href="/login" style="
+                    <li class="active"><a href="/login" style="
             font-size: 17px;
             background-color:#222222;
           padding-right: 40px;
           padding-left: 0px;
-      "><span  class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-   <!-- typewriting -->
-   <div style="margin-top:40px">
-      <center>
-          <h1>
-              <a style="font-weight:700; color:#A10029; " href="" class="typewrite" data-period="2000" data-type='[ "Welcome to titan interiors.", "Get free of cost Estimates.", "We offer various interior items." ]'>
-    <span class="wrap"></span>
-  </a>
-          </h1>
-      </center>
-  </div>
-
-  <script>
-      var TxtType = function (el, toRotate, period) {
-          this.toRotate = toRotate;
-          this.el = el;
-          this.loopNum = 0;
-          this.period = parseInt(period, 10) || 2000;
-          this.txt = '';
-          this.tick();
-          this.isDeleting = false;
-      };
-
-      TxtType.prototype.tick = function () {
-          var i = this.loopNum % this.toRotate.length;
-          var fullTxt = this.toRotate[i];
-
-          if (this.isDeleting) {
-              this.txt = fullTxt.substring(0, this.txt.length - 1);
-          } else {
-              this.txt = fullTxt.substring(0, this.txt.length + 1);
-          }
-
-          this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
-
-          var that = this;
-          var delta = 200 - Math.random() * 100;
-
-          if (this.isDeleting) {
-              delta /= 2;
-          }
-
-          if (!this.isDeleting && this.txt === fullTxt) {
-              delta = this.period;
-              this.isDeleting = true;
-          } else if (this.isDeleting && this.txt === '') {
-              this.isDeleting = false;
-              this.loopNum++;
-              delta = 500;
-          }
-
-          setTimeout(function () {
-              that.tick();
-          }, delta);
-      };
-
-      window.onload = function () {
-          var elements = document.getElementsByClassName('typewrite');
-          for (var i = 0; i < elements.length; i++) {
-              var toRotate = elements[i].getAttribute('data-type');
-              var period = elements[i].getAttribute('data-period');
-              if (toRotate) {
-                  new TxtType(elements[i], JSON.parse(toRotate), period);
-              }
-          }
-          // INJECT CSS
-          var css = document.createElement("style");
-          css.type = "text/css";
-          css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-          document.body.appendChild(css);
-      };
-  </script>
-  <!-- end typewriting -->
-
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" >
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="3" class=""></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item">
-        <img src="../images/TitanInteriors.jpg" alt="titan interiors">
-        <div class="carousel-caption">
-          <h3>Titan Interiors</h3>
+      "><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
+    </nav>
 
-
-      <div class="item">
-        <img src="/images/wallpapers.jpg" alt="Wallpapers">
-        <div class="carousel-caption">
-          <h3>Wallpapers</h3>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="/images/Blinds.jpg" alt="Blinds">
-        <div class="carousel-caption">
-          <h3>Blinds</h3>
-        </div>
-      </div>
-
-      <div class="item active">
-        <img src="/images/grass.jpg" alt="Artificial Grass" width="800" height="600px">
-        <div class="carousel-caption">
-          <h3>Artificial Grass</h3>
-        </div>
-      </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="
-left: 150px;
-">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="
-      right: 150px;
-  ">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-  </div>
-
-  <!-- Map Section -->
-  <div style="padding-top:10px;">
-    <br>
-    <center>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13304.551748089989!2d73.14156903894464!3d33.52379915386448!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd6cf3d62d9e39fe5!2sTitan+Interiors!5e0!3m2!1sen!2sus!4v1471513308186"
-      width="930" height="180" frameborder="0" style="border: 1px solid #222222;"></iframe></center>
-  </div>
-
-  <!-- Contact Section -->
-  <section id="contact" class="container content-section text-center">
-    <h2>Contact Us!</h2>
-    <div class="row">
-      <div class="col-lg-3 col-lg-offset-2">
-        <br>
-        <i class="glyphicon glyphicon-phone-alt" style="font-size:1.7em"></i><span style="font-size: 1.7em;"> | 051 - 5709309 </span>
-        <br><br>
-        <span style="font-size: 1.7em;text-align:right;">   0334 - 5511579   </span>
-      </div>
-      <div class="col-lg-4 col-lg-offset-2">
-        <br>
-        <i class="glyphicon glyphicon-map-marker" style="font-size:1.7em"></i><span style="font-size: 1.7em;">  | Shop # 1, Pindi Plaza </span>
-        <br>
-        <span style="font-size: 1.7em;">  DHA 2, G.T Road, </span>
-        <br>
-        <span style="font-size: 1.7em;">   Islamabad. </span>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container text-center">
-      <p style="padding-top:40px;">Copyright &copy; Titan Interiors 2017</p>
-    </div>
-  </footer>
-
-
-
-    
-    <!-- LogIn Modal end -->
-
-
-    <!-- <div class="container">
+ <div class="container">
 
         <div class="col-sm-6 col-sm-offset-3">
 
-            <h1><span class="fa fa-sign-in"></span> Login</h1> -->
+            <h1><span class="fa fa-sign-in"></span> Login</h1>
 
             <!-- show any messages that come back with authentication -->
-            <!-- <% if (message.length > 0) { %>
+             <% if (message.length > 0) { %>
                 <div class="alert alert-danger">
                     <%= message %>
                 </div>
-                <% } %> -->
+                <% } %> 
 
                     <!-- LOGIN FORM -->
-                    <!-- <form action="/login" method="post">
+                     <form action="/login" method="post">
                         <div class="form-group">
                             <label>Email</label>
                             <input type="text" class="form-control" name="email">
@@ -312,46 +116,29 @@ left: 150px;
                         </div>
 
                         <button type="submit" class="btn btn-warning btn-lg">Login</button>
-                    </form> -->
+                    </form> 
 
-                    <!-- <hr>
+                     <hr>
 
                     <p>Need an account? <a href="/signup">Signup</a></p>
                     <p>Or go <a href="/">home</a>.</p>
 
         </div>
 
-    </div> -->
-    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+    </div> 
+   
     
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal Header</h4>
-          </div>
-          <div class="modal-body">
-                <form action="/login" method="post">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
+   
+  <footer>
+    <div class="container text-center">
+      <p style="padding-top:40px;">Copyright &copy; Titan Interiors 2017</p>
+    </div>
+  </footer>
 
-                    <button type="submit" class="btn btn-warning btn-lg">Login</button>
-                </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+
+
+    
+   
     
 </body>
 

@@ -37,6 +37,10 @@ background-color: #9d9d9d;
             height: 80px;
             width: 300px;
         ">
+        
+                
+                     
+                    
             </div>
             <div class="collapse navbar-collapse" id="MyNavbar">
                 <ul class="nav navbar-nav">
@@ -91,27 +95,39 @@ background-color: #9d9d9d;
 
     <!-- estimation-area -->
     <div class="row">
+            
         <!-- estimation -->
         <div class="col-md-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Get Estimates</div>
+                <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; "><center><b>Get Estimates</b></center></div>
                 <div class="panel-body">
                     <div class="estimate">
+                            <div class="panel panel-default">
+                                    <div class="panel-body"  style="background:#A10029; color:white; font-size:15px;"><b>Select Type</b></div>
+                                  </div>
                         <form>
-                            <div class="radio-btn">
+                            <div class="radio-btn" style="font-size:15px; ">
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio" onclick="Wall()" checked>Wall</label>
+                                    <label><input type="radio" name="optradio" onclick="Wall()" checked><b>Wall</b></label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio" onclick="Window()">Window</label>
+                                    <label><input type="radio" name="optradio" onclick="Window()"><b>Window</b></label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="optradio" onclick="Floor()">Floor</label>
+                                    <label><input type="radio" name="optradio" onclick="Floor()"><b>Floor</b></label>
                                 </div>
                             </div>
+                            <div class="panel panel-default">
+                                    <div class="panel-body"  style="background:#A10029; color:white; font-size:15px;"><b>Dimensions</b></div>
+                                  </div>
                             <div class="input-group">
                                 <input type="number" min="0" class="form-control" placeholder="width">
+                                <br>
+                                <br>
                                 <input type="number" min="0" class="form-control" placeholder="Height">
+                                <br>
+                                <br>
+                                <br>
                                 <div>
                                     <input type="submit" class="btn btn-info" value="Enter">
                                 </div>
@@ -207,23 +223,23 @@ window.onload = function() {
         <!-- products -->
         <div class="col-md-5" >
             <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Select Products</div>
+                <div class="panel panel-default" >
+                    <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; "><center><b>Select Products</b></center></div>
                     <div class="panel-body" id="app4">
                             <div class="col-md-6"  v-for="Product in data">
-                                <div class="panel panel-default" >
-                                    <div class="panel-heading">
-                                        {{ Product.name }}
+                                <div class="panel panel-default"  >
+                                    <div class="panel-heading" style="background:#A10029; color:white; ">
+                                      <center> <p style="font-size:15px"><b> {{ Product.name }} </b></p></center>
                                     </div>
-                                    <div class="panel-body" v-for = "Category in Product.Categories">
+                                    <div class="panel-body" v-for = "Category in Product.Categories" style="padding-top:5px; padding-bottom:0px; padding-left:20px; padding-right:20px">
                                         <div class="panel-group" id="accordion">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading">
+                                                <div class="panel-heading" style="background:#A10029; color:white;  " >
                                                     <h4 class="panel-title">
                           
                                                         <!--SEE HREF BELOW -->
                                                         <a data-toggle="collapse" data-parent="#accordion" :href="`#${Category._id}`"  >
-                                                            <p>{{ Category.name }}</p> 
+                                                            <p style="font-size:13px">{{ Category.name }}</p> 
                                                             </a>
                                                      </h4>
                                                  </div>
@@ -231,11 +247,10 @@ window.onload = function() {
                                                  <!-- SEE ID BELOW AS WELL -->
                                                  <div v-bind:id="Category._id" class="panel-collapse collapse">
                                                      <div class="panel-body">
-
-                                                        <h3>sjkbflsdbfljsdljfbakdbasda
-                                                            kbasbdkasbdasbda
-                                                            asdbakdbsadsd kasbflasn
-                                                        </h3>
+                                                            <img v-bind:src="Category.image" alt="Lights" style="width:100%">
+                                                         <p>Price : {{ Category.price }}</p>
+                                                        
+                                                        <button type="button" class="btn btn-primary btn-xs">Select Product</button>
                                                      </div>
                                                  </div>
                                            </div>

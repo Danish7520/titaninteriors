@@ -1,4 +1,5 @@
 var Products = require("./models/products");
+var UserSchema = require("./models/user");
 // app/routes.js
 module.exports = function(app, passport) {
 
@@ -128,17 +129,35 @@ app.post('/login', passport.authenticate('local-login', {
     app.get('/signup', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+        res.render('signup.ejs' );
     });
 
     // process the signup form
     // app.post('/signup', do all our passport stuff here);
    // process the signup form
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    app.post('/signup',function(req,res){
+         console.log(req.body, "huhuhyhuyhu")
+         var User = new UserSchema({
+            FirstName:req.body.firstName,
+            LastName:req.body.lasttName,
+            Email :req.body.email,
+            Password :req.body.password,
+        
+            Estimate: [
+       
+            ]
+         });
+         User.save(function(err, _user){
+             if(err){
+                 console.log("There is an error")
+             }
+             else{
+                 console.log("User saved")
+                  res.render('index.ejs');
+             }
+         })    
+        })
+    
 
 
     // =====================================
