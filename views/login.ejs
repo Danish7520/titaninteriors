@@ -90,6 +90,39 @@ background-color: #9d9d9d;
             </div>
         </div>
     </nav>
+    <script>
+        function handleLogin(){
+            console.log("email"+document.getElementById("email").value)
+            
+            
+                $.ajax({
+                  type: "POST",
+                  url: "/login",
+                  data: {email:document.getElementById("email").value,
+                password:document.getElementById("password").value}
+                })
+                  .done(function(data) {
+                      if(data){
+                        console.log("done if" + data);
+                    window.location.href = "index.ejs";
+                    localStorage.setItem("userInfo",JSON.stringify({FirstName:data.FirstName,LastName:data.LastName,Email:data.Email}))
+                      }
+                      else{
+                        console.log("done else" + data);
+                    // window.location.href = "login.ejs";
+                      }
+                   
+                  })
+                  .fail(function(jqXhr) {
+                    // console.log("failed to register");
+                  });
+        }
+        
+   
+
+
+        
+    </script>
 
  <div class="container">
 
@@ -97,26 +130,21 @@ background-color: #9d9d9d;
 
             <h1><span class="fa fa-sign-in"></span> Login</h1>
 
-            <!-- show any messages that come back with authentication -->
-             <% if (message.length > 0) { %>
-                <div class="alert alert-danger">
-                    <%= message %>
-                </div>
-                <% } %> 
+            
 
                     <!-- LOGIN FORM -->
-                     <form action="/login" method="post">
+                     
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" class="form-control" name="email">
+                            <input type="text" class="form-control" name="email" id="email">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
 
-                        <button type="submit" class="btn btn-warning btn-lg">Login</button>
-                    </form> 
+                        <button  class="btn btn-warning btn-lg" onClick="handleLogin()">Login</button>
+                    
 
                      <hr>
 

@@ -1,5 +1,5 @@
 var Products = require("./models/products");
-var UserSchema = require("./models/user");
+var users = require("./models/user");
 // app/routes.js
 module.exports = function(app, passport) {
 
@@ -112,16 +112,32 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') }); 
+        res.render('login.ejs'); 
     });
 
     // process the login form
     // app.post('/login', do all our passport stuff here);
-app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+ app.post('/login', function(req,res){
+     console.log("hdfjhghj", req.body)
+     users.findOne({
+         Email:req.body.email,
+         Password:req.body.password
+     },function(err,_user){
+         if(err){
+             console.log("error");
+         }
+         else{
+             console.log("jkdfhsbbjb",_user)
+             if(!_user){
+                
+                res.json(_user);
+             }
+             else{
+                 res.json(_user);
+             }
+         }
+     })
+ });
     // =====================================
     // SIGNUP ==============================
     // =====================================
@@ -137,9 +153,9 @@ app.post('/login', passport.authenticate('local-login', {
    // process the signup form
     app.post('/signup',function(req,res){
          console.log(req.body, "huhuhyhuyhu")
-         var User = new UserSchema({
-            FirstName:req.body.firstName,
-            LastName:req.body.lasttName,
+         var User = new users({
+            FirstName:req.body.firstname,
+            LastName:req.body.lastname,
             Email :req.body.email,
             Password :req.body.password,
         
@@ -153,7 +169,7 @@ app.post('/login', passport.authenticate('local-login', {
              }
              else{
                  console.log("User saved")
-                  res.render('index.ejs');
+                  res.json(_user);
              }
          })    
         })

@@ -105,7 +105,7 @@ background-color: #9d9d9d;
                             <div class="panel panel-default">
                                     <div class="panel-body"  style="background:#A10029; color:white; font-size:15px;"><b>Select Type</b></div>
                                   </div>
-                        <form>
+                        
                             <div class="radio-btn" style="font-size:15px; ">
                                 <div class="radio">
                                     <label><input type="radio" name="optradio" onclick="Wall()" checked><b>Wall</b></label>
@@ -121,24 +121,28 @@ background-color: #9d9d9d;
                                     <div class="panel-body"  style="background:#A10029; color:white; font-size:15px;"><b>Dimensions</b></div>
                                   </div>
                             <div class="input-group">
-                                <input type="number" min="0" class="form-control" placeholder="width">
+                                <input type="number" min="0" class="form-control" placeholder="width" id="width">
                                 <br>
                                 <br>
-                                <input type="number" min="0" class="form-control" placeholder="Height">
+                                <input type="number" min="0" class="form-control" placeholder="Height" id="height">
                                 <br>
                                 <br>
                                 <br>
                                 <div>
-                                    <input type="submit" class="btn btn-info" value="Enter">
+                                    <input type="button" class="btn btn-info" onclick="estimation()" value="Enter">
+                                </div>
+                                <div id="error"> 
+                                    
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
         </div>
         <script>
         function Wall(){
+            $('#height').attr('placeholder','Height');
             console.log("oooooo")
             $.ajax({
                 tyoe:"GET",
@@ -156,6 +160,7 @@ background-color: #9d9d9d;
 
         }
         function Window(){
+            $('#height').attr('placeholder','Height');
             console.log("ooooo1")
             $.ajax({
                 tyoe:"GET",
@@ -175,6 +180,8 @@ background-color: #9d9d9d;
 
         }
         function Floor(){
+            $('#height').attr('placeholder','Length');
+            // document.getElementById('#height')[0].placeholder='new text for email';
             console.log("ooooo2")
             $.ajax({
                 tyoe:"GET",
@@ -189,6 +196,40 @@ app4.data=data;
                 
             });
 
+
+        }
+
+        // enter function estimatin
+        function estimation(){
+            var width = $('#width').val();
+            console.log("enter", width)
+            var height = $('#height').val();
+            console.log("enter", height)
+
+            if(width ==""){
+                document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Width is required</strong>
+                  </div>`;
+            }
+            if(height ==""){
+                document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Height is required</strong>
+                  </div>`;
+            }
+            if(width <0){
+                document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Width should be greater than 0</strong>
+                  </div>`;
+            }
+            if(height <0){
+                document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Height should be greater than 0</strong>
+                  </div>`;
+            }
 
         }
 
@@ -248,7 +289,7 @@ window.onload = function() {
                                                  <div v-bind:id="Category._id" class="panel-collapse collapse">
                                                      <div class="panel-body">
                                                             <img v-bind:src="Category.image" alt="Lights" style="width:100%">
-                                                         <p>Price : {{ Category.price }}</p>
+                                                         <p><b>Price per piece <br>{{ Category.price }} Rupees</b></p>
                                                         
                                                         <button type="button" class="btn btn-primary btn-xs">Select Product</button>
                                                      </div>
