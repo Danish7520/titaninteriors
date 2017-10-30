@@ -204,7 +204,7 @@ app4.data=data;
             var width = $('#width').val();
             console.log("enter", width)
             var height = $('#height').val();
-            console.log("enter", height)
+            console.log("enter", $('#height')[0].placeholder)
 
             if(width ==""){
                 document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
@@ -213,10 +213,18 @@ app4.data=data;
                   </div>`;
             }
             if(height ==""){
-                document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                if($('#height')[0].placeholder == "Height"){
+                    document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>*Height is required</strong>
                   </div>`;
+                }else{
+                    document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Length is required</strong>
+                  </div>`;
+                }
+
             }
             if(width <0){
                 document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
@@ -230,13 +238,23 @@ app4.data=data;
                     <strong>*Height should be greater than 0</strong>
                   </div>`;
             }
+            if(productselected ==""){
+                document.getElementById('error').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Select a product*</strong>
+                  </div>`;
+            }
+            console.log('selectedproduct',productselected);
 
         }
+
+       
 
 
         </script>
         <script>
 var app4;
+var productselected="";
 window.onload = function() {
                     $.ajax({
                 tyoe:"GET",
@@ -248,7 +266,14 @@ window.onload = function() {
  app4 = new Vue({
   el: '#app4',
   data: {         data
-  }
+  },
+  methods : {
+        selectproduct : function(pess){
+            console.log(pess);
+            productselected=pess
+            // alert(pess.nome);
+        }
+    }
             })
             })
             .fail(function(){
@@ -291,7 +316,7 @@ window.onload = function() {
                                                             <img v-bind:src="Category.image" alt="Lights" style="width:100%">
                                                          <p><b>Price per piece <br>{{ Category.price }} Rupees</b></p>
                                                         
-                                                        <button type="button" class="btn btn-primary btn-xs">Select Product</button>
+                                                        <button type="button" class="btn btn-primary btn-xs" v-on:click="selectproduct(Category)" >Select Product</button>
                                                      </div>
                                                  </div>
                                            </div>

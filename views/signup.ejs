@@ -90,9 +90,35 @@ background-color: #9d9d9d;
     </nav>
 <script>
     function handlesignup(){
-            console.log("email"+document.getElementById("email").value)
-            
-            
+        var firstname = $('#firstname').val();
+        var lastname = $('#lastname').val();
+        var password = $('#password').val();
+        var email = $('#email').val();
+        if(firstname ==""){
+                document.getElementById('errorfirstname').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*FirstName is required*</strong>
+                  </div>`;
+            }
+            else if(lastname ==""){
+                document.getElementById('errorlastname').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*LastName is required*</strong>
+                  </div>`;
+            }
+            else if(email ==""){
+                document.getElementById('erroremail').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Password is required*</strong>
+                  </div>`;
+            }
+            else if(password ==""){
+                document.getElementById('errorpassword').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Password is required*</strong>
+                  </div>`;
+            }
+            else{
                 $.ajax({
                   type: "POST",
                   url: "/signup",
@@ -103,10 +129,19 @@ background-color: #9d9d9d;
                 })
                   .done(function(data) {
                       if(data){
-                        console.log("done if" + data);
+                          if(data=="email already exist"){
+                            document.getElementById('errorpassword').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Email already exist*</strong>
+                  </div>`;
+                          }
+                          else{
+                            console.log("done if" + data);
                     window.location.href = "index.ejs";
                     console.log(data.Firstname)
                     localStorage.setItem("userInfo",JSON.stringify({FirstName:data.FirstName,LastName:data.LastName,Email:data.Email}))
+                          }
+                        
                       }
                       else{
                         console.log("done else" + data);
@@ -117,6 +152,9 @@ background-color: #9d9d9d;
                   .fail(function(jqXhr) {
                     // console.log("failed to register");
                   });
+            }
+            
+               
         }
 </script>
 
@@ -134,18 +172,30 @@ background-color: #9d9d9d;
                                 <label>First Name</label>
                                 <input type="text" class="form-control" name="firstName" id="firstname">
                             </div>
+                            <div id="errorfirstname"> 
+                                    
+                                </div>
                             <div class="form-group">
                                     <label>Last Name</label>
                                     <input type="text" class="form-control" name="lastName" id="lastname">
                                 </div>
+                                <div id="errorlastname"> 
+                                        
+                                    </div>
                         <div class="form-group">
                             <label>Email</label>
                             <input type="text" class="form-control" name="email" id="email">
                         </div>
+                        <div id="erroremail"> 
+                                
+                            </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" id="password">
                         </div>
+                        <div id="errorpassword"> 
+                                
+                            </div>
 
                         <button  class="btn btn-warning btn-lg" onclick="handlesignup()">Signup</button>
                     

@@ -163,15 +163,31 @@ module.exports = function(app, passport) {
        
             ]
          });
-         User.save(function(err, _user){
+         users.findOne({
+             Email:req.body.email
+         },function(err,user){
              if(err){
-                 console.log("There is an error")
+                 console.log("error",err)
              }
              else{
-                 console.log("User saved")
-                  res.json(_user);
+                 if(user){
+                     console.log("already")
+                     res.send("email already exist")
+                 }
+                 else{
+                    User.save(function(err, _user){
+                        if(err){
+                            console.log("There is an error")
+                        }
+                        else{
+                            console.log("User saved")
+                             res.json(_user);
+                        }
+                    })    
+                 }
              }
-         })    
+         })
+        
         })
     
 
