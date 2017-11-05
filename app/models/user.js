@@ -16,7 +16,19 @@ var UserSchema=new Schema({
 //     // total_cost:"number",
 //     // total_material:"number"
 // }
-    ]
+    ],
+    History: [
+        // {
+        //     width:"number",
+        //     height:"number",
+        //     price:"number",
+        //     name:"String",
+        //     cost:"number",
+        //     totalcost:"number",
+        //     no_of_rolls:"number",
+        //     no_of_rolls2:"number",
+        // }
+            ]
 
 });
 module.exports= mongoose.model("users", UserSchema);

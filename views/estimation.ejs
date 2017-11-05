@@ -15,6 +15,13 @@
     html {
         overflow-x: hidden;
     }
+    .panel-body .estimate p{
+        font-size: 15px;
+        text-decoration: underline;
+    }
+    #panelbody{
+        margin-right: 50px;
+    }
 </style>
 
 <body style="
@@ -53,12 +60,18 @@ background-color: #9d9d9d;
                 top: 40px;
                 left: 40px;
             ">Estimation</a></li>
-                    <li><a href="#" style="
+                    <li><a href="/VR" style="
             font-size: 20px;
                 padding-bottom: 5px;
                 top: 40px;
                 left: 40px;
             ">VR</a></li>
+            <li id="history"><a href="/history" style="
+                font-size: 20px;
+                    padding-bottom: 5px;
+                    top: 40px;
+                    left: 40px;
+                ">History</a></li>
                     <li><a href="/contacts" style="
             font-size: 20px;
                 padding-bottom: 5px;
@@ -87,23 +100,358 @@ background-color: #9d9d9d;
         </div>
     </nav>
 
+     <!-- script tag -->
+     <script>                   
+                                var width;
+                                var height;
+                                var height_in_meter;
+                                var width_in_meter ;
+                                var db_height_in_meter;
+                                var db_width_in_meter;
+                               
+                                var in_square_meter;
+                                var three_percent;
+                                var in_square_meter2;
+                                var db_in_square_meter;
+                                var no_of_rolls;
+                                var no_of_rolls2;
+                                
+                                var price;
+                                var price2;
+                        var app4;     // variable 
+                        var productselected = ""; // variable
+
+                        function back(){
+                            $("#estimationarea").show();
+                                $("#invoice").hide();
+                                $('#error2').hide();
+                        }
+                        function save(){
+                            if(localStorage.getItem("userInfo")){
+                                console.log("inside if",price)
+                                var data={id:JSON.parse(localStorage.getItem("userInfo"))._id, width:width,height:height,price:productselected.price,name:productselected.name,no_of_rolls:no_of_rolls,no_of_rolls2:no_of_rolls2,cost:price,totalcost:price2}
+                                // var data = {id:localStorage.getItem("userInfo")._id}
+                                console.log("abc",JSON.parse(localStorage.getItem("userInfo"))._id)
+                                $.ajax({
+                  type: "POST",
+                  url: "/save",
+                  data: data,
+                })
+                  .done(function(data) {
+                      console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",data)
+                      if (data){
+                        $('#error2').show();
+                        document.getElementById('error2').innerHTML =
+                                    `  <div class="alert alert-success alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Save Successfully</strong>
+                              </div>`;
+                              setTimeout(function() {
+                                $("#estimationarea").show();
+                                $("#invoice").hide();
+                                $('#error2').hide();
+                              }, 1000);
+                      }
+                   
+                  })
+                  .fail(function(jqXhr) {
+                    // console.log("failed to register");
+                  });
+                                // $.ajax({
+                                //     tyoe: "POST",
+                                //     url: "/save",
+                                //     data: data,
+            
+                                // })
+                                // .done(function (data) {
+                                //     console.log("done", data)
+                                   
+            
+                                // })
+                                // .fail(function () {
+            
+                                // });
+                            }
+                            else{
+                                console.log("please login");
+                            }
+                           
+                        }
+            
+                        // load when window is loaded
+                        window.onload = function () {
+                            $("#invoice").hide();
+                            $('#error2').hide();
+                            // ajax request for getting data when window is first time loaded
+                            $.ajax({
+                                    tyoe: "GET",
+                                    url: "/Wall"
+            
+                                })
+                                .done(function (data) {
+                                    
+                                    // create object of Vuejs
+                                    app4 = new Vue({
+                                        el: '#app4',
+                                        data: {
+                                            data
+                                        },
+                                        methods: {
+                                            selectproduct: function (pess) {
+                                                document.getElementById('productselected').innerHTML =
+                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                       `+pess.name+`
+                              </div>`;
+                                                console.log(pess);
+                                                productselected = pess
+                                            }
+                                        }
+                                    })
+                                })
+                                .fail(function () {
+            
+                                });
+                        }
+            
+                        //call when window load
+                        function Wall() {
+                            $('#height').attr('placeholder', 'Height'); // place height in height field
+                            // ajax request for wall 
+                            $.ajax({
+                                    tyoe: "GET",
+                                    url: "/Wall"
+            
+                                })
+                                .done(function (data) {
+                                    console.log("done", data)
+                                    app4.data = data;
+            
+                                })
+                                .fail(function () {
+            
+                                });
+                            }
+                        
+                        // call when window is selected
+                        function Window() {
+                            $('#height').attr('placeholder', 'Height'); // place height in height field
+                            console.log("ooooo1")
+                            // ajax request for window
+                            $.ajax({
+                                    tyoe: "GET",
+                                    url: "/Window"
+            
+                                })
+                                .done(function (data) {
+                                    console.log("done", data)
+                                    app4.data = data;
+            
+            
+                                })
+                                .fail(function () {
+            
+                                });
+                            }
+                        
+                        // call when floor is selected
+                        function Floor() {
+                            $('#height').attr('placeholder', 'Length'); // jqjuery to place lenth in lenth field when window is selected
+                            // ajax request to get data of floor when floor is selected
+                            $.ajax({
+                                    tyoe: "GET",
+                                    url: "/Floor"
+            
+                                })
+                                .done(function (data) {
+                                    console.log("done", data)
+                                    app4.data = data;
+                                })
+                                .fail(function () {
+            
+                                });
+                            }
+            
+                        // enter function estimation
+                        function estimation() {
+                             width = $('#width').val();    // store width
+                             height = $('#height').val();  // store height
+                            
+                            // if condition when width is not given
+                            if (width == "") {
+                                document.getElementById('error').innerHTML =
+                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Width is required</strong>
+                              </div>`;
+                            }
+            
+                            // if condition when height is not given
+                            else if (height == "") {
+                                // if for height
+                                if ($('#height')[0].placeholder == "Height") {
+                                    document.getElementById('error').innerHTML =
+                                        `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Height is required</strong>
+                              </div>`;
+                                } 
+                                // else for lenth
+                                else {
+                                    document.getElementById('error').innerHTML =
+                                        `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Length is required</strong>
+                              </div>`;
+                                }
+            
+                            }
+            
+                            // if width is less than 0 show this error
+                            else if (width < 0) {
+                                document.getElementById('error').innerHTML =
+                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Width should be greater than 0</strong>
+                              </div>`;
+                            }
+            
+                            // if height is less than 0 show this error message
+                            else if (height < 0) {
+                                if ($('#height')[0].placeholder == "Height"){
+                                document.getElementById('error').innerHTML =
+                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Height should be greater than 0</strong>
+                              </div>`;
+                              }
+                              else{
+                                document.getElementById('error').innerHTML =
+                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Lenth should be greater than 0*</strong>
+                              </div>`;
+                            }
+                            }
+            
+                            // if product is not selected show this error message
+                            else if (productselected == "") {
+                                document.getElementById('error').innerHTML =
+                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>*Select a product*</strong>
+                              </div>`;
+                            }
+                            else {
+                                
+
+                                 height_in_meter = height*0.3048;
+                                 width_in_meter = width*0.3048;
+                                 db_height_in_meter = productselected.height*0.3048;
+                                 db_width_in_meter = productselected.width*0.3048;
+                               
+                                 in_square_meter = height_in_meter*width_in_meter;
+                                 three_percent = in_square_meter*0.03;
+                                 in_square_meter2 = in_square_meter + three_percent;
+                                 db_in_square_meter = db_width_in_meter*db_height_in_meter;
+                                 no_of_rolls = in_square_meter/db_in_square_meter;
+                                 no_of_rolls2 = in_square_meter2/db_in_square_meter;
+                                
+            
+                                
+                                 price = Math.ceil(no_of_rolls)*productselected.price;
+                                 price2 = Math.ceil(no_of_rolls2)*productselected.price;
+                               
+                                $("#estimationarea").hide();
+                                $("#invoice").show();
+
+                                document.getElementById('invoice').innerHTML =
+                                    `
+                                    <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                    <div class="panel panel-default">
+                            <div class="panel-heading">Invoice</div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>
+                                        <p>Width : `+width+`</p>
+                                    </li>
+                                    <li>
+                                        <p>Height : `+height+`</p>
+                                    </li>
+                                    <li>
+                                        <p>Price : `+productselected.price+`/piece </p>
+                                    </li>
+                                    <li>
+                                        <p>No of Rolls : `+Math.ceil(no_of_rolls)+` </p>
+                                    </li>
+                                    <li>
+                                        <p>Cost : `+price+` </p>
+                                    </li>
+                                    <li>
+                                        <p>Wastage : 3 percent</p>
+                                    </li>
+                                    <li>
+                                        <p>No of Rolls with Wastage : `+Math.ceil(no_of_rolls2)+`</p>
+                                    </li>
+                                    <li>
+                                        <p>Total Cost : `+price2+`</p>
+                                    </li>
+                                </ul>
+                                <div class="row">
+                                        <div class="col-md-2">
+                                           
+                                        </div>
+                                    <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary btn-xs" onclick = back() >Back</button>
+                                        </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary btn-xs" onclick = save() >Save</button>
+                                            
+                                
+                                        </div>
+                                        <div class="col-md-2">
+                                            
+                                        </div>
+                                    </div>
+                            </div>
+                          </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+                                    `;
+            
+                            }
+                            
+                            
+            
+                        }
+                    </script>
+                  
+    <div id="invoice">
+       
+    </div>
+    <div id="error2">
+
+    </div>
 
     <!-- estimation-area -->
-    <div class="row">
-
+    <div class="row" id="estimationarea">
+        <div class="col-md-1"></div>        
         <!-- estimation -->
-        <div class="col-md-2">
-            <div class="panel panel-default">
+        <div class="col-md-3" style="margin-right:25px">
+            <div class="panel panel-default" style="margin-right:30px">
                 <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; ">
                     <center><b>Get Estimates</b></center>
                 </div>
                 <div class="panel-body">
                     <div class="estimate">
-                        <div class="panel panel-default">
+                        <!-- <div class="panel panel-default">
                             <div class="panel-body" style="background:#A10029; color:white; font-size:15px;"><b>Select Type</b></div>
-                        </div>
-
-                        <div class="radio-btn" style="font-size:15px; ">
+                        </div> -->
+                        <p ><b>Select Type</b></p>
+                        <div class="radio-btn" style="font-size:12px; ">
                             <div class="radio">
                                 <label><input type="radio" name="optradio" onclick="Wall()" checked><b>Wall</b></label>
                             </div>
@@ -114,17 +462,17 @@ background-color: #9d9d9d;
                                 <label><input type="radio" name="optradio" onclick="Floor()"><b>Floor</b></label>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-body" style="background:#A10029; color:white; font-size:15px;"><b>Dimensions</b></div>
-                        </div>
+                        <p><b>Dimensions</b></p>
                         <div class="input-group">
                             <input type="number" min="0" class="form-control" placeholder="width" id="width">
-                            <br>
-                            <br>
+                             <br>
+                             <br>
                             <input type="number" min="0" class="form-control" placeholder="Height" id="height">
                             <br>
                             <br>
-                            <br>
+                            <div id="productselected">
+                                
+                            </div>
                             <div>
                                 <input type="button" class="btn btn-info" onclick="estimation()" value="Enter">
                             </div>
@@ -139,190 +487,21 @@ background-color: #9d9d9d;
             </div>
         </div>
 
-        <!-- script tag -->
-        <script>
-
-            var app4;     // variable 
-            var productselected = ""; // variable
-
-            // load when window is loaded
-            window.onload = function () {
-                // ajax request for getting data when window is first time loaded
-                $.ajax({
-                        tyoe: "GET",
-                        url: "/Wall"
-
-                    })
-                    .done(function (data) {
-                        
-                        // create object of Vuejs
-                        app4 = new Vue({
-                            el: '#app4',
-                            data: {
-                                data
-                            },
-                            methods: {
-                                selectproduct: function (pess) {
-                                    console.log(pess);
-                                    productselected = pess
-                                }
-                            }
-                        })
-                    })
-                    .fail(function () {
-
-                    });
-            }
-
-            //call when window load
-            function Wall() {
-                $('#height').attr('placeholder', 'Height'); // place height in height field
-                // ajax request for wall 
-                $.ajax({
-                        tyoe: "GET",
-                        url: "/Wall"
-
-                    })
-                    .done(function (data) {
-                        console.log("done", data)
-                        app4.data = data;
-
-                    })
-                    .fail(function () {
-
-                    });
-                }
-            
-            // call when window is selected
-            function Window() {
-                $('#height').attr('placeholder', 'Height'); // place height in height field
-                console.log("ooooo1")
-                // ajax request for window
-                $.ajax({
-                        tyoe: "GET",
-                        url: "/Window"
-
-                    })
-                    .done(function (data) {
-                        console.log("done", data)
-                        app4.data = data;
-
-
-                    })
-                    .fail(function () {
-
-                    });
-                }
-            
-            // call when floor is selected
-            function Floor() {
-                $('#height').attr('placeholder', 'Length'); // jqjuery to place lenth in lenth field when window is selected
-                // ajax request to get data of floor when floor is selected
-                $.ajax({
-                        tyoe: "GET",
-                        url: "/Floor"
-
-                    })
-                    .done(function (data) {
-                        console.log("done", data)
-                        app4.data = data;
-                    })
-                    .fail(function () {
-
-                    });
-                }
-
-            // enter function estimation
-            function estimation() {
-                var width = $('#width').val();    // store width
-                var height = $('#height').val();  // store height
-                
-                // if condition when width is not given
-                if (width == "") {
-                    document.getElementById('error').innerHTML =
-                        `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Width is required</strong>
-                  </div>`;
-                }
-
-                // if condition when height is not given
-                if (height == "") {
-                    // if for height
-                    if ($('#height')[0].placeholder == "Height") {
-                        document.getElementById('error').innerHTML =
-                            `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Height is required</strong>
-                  </div>`;
-                    } 
-                    // else for lenth
-                    else {
-                        document.getElementById('error').innerHTML =
-                            `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Length is required</strong>
-                  </div>`;
-                    }
-
-                }
-
-                // if width is less than 0 show this error
-                if (width < 0) {
-                    document.getElementById('error').innerHTML =
-                        `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Width should be greater than 0</strong>
-                  </div>`;
-                }
-
-                // if height is less than 0 show this error message
-                if (height < 0) {
-                    if ($('#height')[0].placeholder == "Height"){
-                    document.getElementById('error').innerHTML =
-                        `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Height should be greater than 0</strong>
-                  </div>`;
-                  }
-                  else{
-                    document.getElementById('error').innerHTML =
-                        `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Lenth should be greater than 0*</strong>
-                  </div>`;
-                }
-                }
-
-                // if product is not selected show this error message
-                if (productselected == "") {
-                    document.getElementById('error').innerHTML =
-                        `  <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Select a product*</strong>
-                  </div>`;
-                }
-                console.log('selectedproduct', productselected);
-
-            }
-        </script>
-        <script>
-            
-        </script>
+       
         <!-- end estimation -->
         <!-- products -->
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; ">
+                <div class="panel panel-default" id="panelbody">
+                    <div class="panel-heading" style="background:#A10029; color:white; font-size:17px;  ">
                         <center><b>Select Products</b></center>
                     </div>
                     <div class="panel-body" id="app4">
                         <div class="col-md-6" v-for="Product in data">
                             <div class="panel panel-default">
-                                <div class="panel-heading" style="background:#A10029; color:white; ">
+                                <div class="panel-heading" style="background:#9D9D9D; color:white; ">
                                     <center>
-                                        <p style="font-size:15px"><b> {{ Product.name }} </b></p>
+                                        <p  style="font-size:15px"><b> {{ Product.name }} </b></p>
                                     </center>
                                 </div>
                                 <div class="panel-body" v-for="Category in Product.Categories" style="padding-top:5px; padding-bottom:0px; padding-left:20px; padding-right:20px">
@@ -333,7 +512,7 @@ background-color: #9d9d9d;
 
                                                     <!--SEE HREF BELOW -->
                                                     <a data-toggle="collapse" data-parent="#accordion" :href="`#${Category._id}`">
-                                                        <p style="font-size:13px">{{ Category.name }}</p>
+                                                        <p class="glyphicon glyphicon-chevron-down" style="font-size:13px">  {{ Category.name }}</p>
                                                     </a>
                                                 </h4>
                                             </div>
@@ -351,17 +530,17 @@ background-color: #9d9d9d;
                                     </div>
                                 </div>
                             </div>
-                            </di>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- end products -->
-                <!-- virtual reality -->
-                <div class="col-md-5">
-                </div>
-                <!-- end virtual reality -->
+               
+                <div class="col-md-1"></div> 
             </div>
+        </div>
+            
             <!--end estimation-area -->
 
 

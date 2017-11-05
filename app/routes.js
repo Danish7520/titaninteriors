@@ -16,9 +16,9 @@ module.exports = function(app, passport) {
         res.render('contacts.ejs'); // load the contacts.ejs file
     });
 
-     // Products
-     app.get('/Products', function(req, res) {
-        res.render('Products.ejs'); // load the products.ejs file
+     // VR
+     app.get('/VR', function(req, res) {
+        res.render('VR.ejs'); // load the products.ejs file
     });
     
     // estimation
@@ -32,11 +32,32 @@ module.exports = function(app, passport) {
                 console.log("not error", _products);
 
             }
-            console.log("This is new data ",_products);
+            // console.log("This is new data ",_products);
             res.render('estimation.ejs'); // load the estimation.ejs file
             
         })
     });
+
+ // history
+ app.get('/history', function(req, res) {
+   res.render('history.ejs')
+});
+
+ // searchhistory
+ app.post('/searchhistory', function(req, res) {
+     console.log(req.body)
+    users.findOne({_id:req.body.id},function(err,_user){
+        if(err){
+            console.log("error",err)
+        }
+        else{
+            res.json(_user.History.reverse())
+        }
+
+    })
+    
+ });
+
 
      // about
      app.get('/about', function(req, res) {
@@ -55,7 +76,7 @@ module.exports = function(app, passport) {
                 console.log("not error", _products);
 
             }
-            console.log("This is new data ",_products);
+            // console.log("This is new data ",_products);
            // res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
              res.json(_products)
         })
@@ -75,7 +96,7 @@ module.exports = function(app, passport) {
                 console.log("not error", _products);
 
             }
-            console.log("This is new data ",_products);
+            // console.log("This is new data ",_products);
             // res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
             res.json(_products)
             //res.render('estimation.ejs', {newdata: _products}); // load the estimation.ejs file
@@ -95,10 +116,40 @@ module.exports = function(app, passport) {
                 console.log("not error", _Floor);
 
             }
-            console.log("This is new data ",_Floor);
             // res.render('estimation.ejs', {newdata: _Floor}); // load the estimation.ejs file
             res.json(_Floor)
         })
+       
+    })
+
+     /// Save
+     app.post("/save",function(req,res){
+        console.log("alllllllllllllllllllllllllllllllllllllllllllllllllllllllllbcd",req.body);
+        var date=new Date();
+        var day = date.getDate();
+        var month=date.getMonth()+1;
+        var year = date.getFullYear();
+        var d = day+"/"+month+"/"+year;
+        users.findOneAndUpdate({_id:req.body.id},{$push:{History:{           
+        width:req.body.width,
+        height:req.body.height,
+        price:req.body.price,
+        name:req.body.name,
+        cost:req.body.cost,
+        totalcost:req.body.totalcost,
+        no_of_rolls:req.body.no_of_rolls,
+        no_of_rolls2:req.body.no_of_rolls2,
+        date:d
+        }
+    }},function(err,_user){
+        if(err)(
+            console.log("error",err)
+        )
+        else{
+            console.log("user updated",_user)
+            res.json(_user)
+        }
+    })
        
     })
 

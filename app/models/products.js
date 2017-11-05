@@ -9,8 +9,11 @@ var productSchema=new Schema({
     name:"String",
     image:"String",
     price:"number",
+    width:"number",
+    height:"number",
 }
     ]
+   
 
 });
 module.exports= mongoose.model("Products", productSchema);

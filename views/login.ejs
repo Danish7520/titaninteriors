@@ -55,7 +55,7 @@ background-color: #9d9d9d;
                 top: 40px;
                 left: 40px;
             ">Estimation</a></li>
-                    <li><a href="#" style="
+                    <li><a href="/VR" style="
             font-size: 20px;
                 padding-bottom: 5px;
                 top: 40px;
@@ -118,7 +118,7 @@ background-color: #9d9d9d;
                       if(data){
                         console.log("done if" + data);
                     window.location.href = "index.ejs";
-                    localStorage.setItem("userInfo",JSON.stringify({FirstName:data.FirstName,LastName:data.LastName,Email:data.Email}))
+                    localStorage.setItem("userInfo",JSON.stringify({_id:data._id,FirstName:data.FirstName,LastName:data.LastName,Email:data.Email}))
                       }
                       else{
                         document.getElementById('errorpassword').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
