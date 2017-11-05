@@ -12,6 +12,9 @@
 </head>
 
 <style>
+   html{
+    overflow-x: hidden;
+  }
  
   .carousel-inner img {
     width: 45%;
@@ -44,29 +47,7 @@ background-color: #9d9d9d;
 ">
 
   <nav class="navbar navbar-inverse ">
-      <script>
-          var app4;
-          var info;
-          
-                     
-          info=JSON.parse(   localStorage.getItem("userInfo"));         
-                 console.log("kjgbkjdfb",info.Email)
-           app4 = new Vue({
-            el: '#app4',
-            data: {
-      name: 'Anika'
-            }    
-            
-            
-                      })                              
-  
-          window.onload = function() {
-               
-          
-
-                  }
-                  
-                  </script>
+      
     <div class="container-fluid" style="
     padding-right:0px;
     padding-left:0px;
@@ -124,10 +105,15 @@ background-color: #9d9d9d;
             ">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" id="app4">
-          <li>
-              {{ name }}
-          </li>
-
+            <li><a href="/signup" style="
+    font-size: 17px;
+  padding-right: 15px;
+"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/login" style="
+    font-size: 17px;
+  padding-right: 40px;
+  padding-left: 0px;
+"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
       </div>
     </div>
@@ -188,7 +174,29 @@ background-color: #9d9d9d;
           }, delta);
       };
 
+      // logout
+      function logout(){
+        console.log("kuch b")
+        localStorage.removeItem("userInfo");
+        location.reload();
+      }
+
       window.onload = function () {
+        if(localStorage.getItem("userInfo")){
+          document.getElementById("app4").innerHTML= `<li><a style="
+    font-size: 17px;
+  padding-right: 15px;
+"><span class="glyphicon glyphicon-user"></span>         `+JSON.parse(localStorage.getItem("userInfo")).FirstName+`</a></li>
+            <li><button onClick=logout() class="btn btn-danger btn-xs"style="
+    font-size: 17px;
+  padding-right: 20px;
+  padding-left: 1%;
+  
+  margin-top: 10%;
+  padding-left: 0px;
+"><span class="glyphicon glyphicon-log-out"></span> LogOut</button></li>`
+        }
+
           var elements = document.getElementsByClassName('typewrite');
           for (var i = 0; i < elements.length; i++) {
               var toRotate = elements[i].getAttribute('data-type');

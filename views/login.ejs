@@ -96,16 +96,24 @@ background-color: #9d9d9d;
         var password = $('#password').val();
         var email = $('#email').val();
         if(email ==""){
+            $('#erroremail').show();
                 document.getElementById('erroremail').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>*Email is required*</strong>
                   </div>`;
+                  setTimeout(function() {
+                                $('#erroremail').hide();
+                              }, 2000);
             }
             else if(password ==""){
+                $('#errorpassword').show();
                 document.getElementById('errorpassword').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>*Password is required*</strong>
                   </div>`;
+                  setTimeout(function() {
+                                $('#errorpassword').hide();
+                              }, 2000);
             }
             else{
                 $.ajax({
@@ -121,10 +129,14 @@ background-color: #9d9d9d;
                     localStorage.setItem("userInfo",JSON.stringify({_id:data._id,FirstName:data.FirstName,LastName:data.LastName,Email:data.Email}))
                       }
                       else{
+                        $('#errorpassword').show();
                         document.getElementById('errorpassword').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>*Email or Password is incorrect*</strong>
                   </div>`;
+                  setTimeout(function() {
+                                $('#errorpassword').hide();
+                              }, 2000);
                     // window.location.href = "login.ejs";
                       }
                    

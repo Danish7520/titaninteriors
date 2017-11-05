@@ -76,7 +76,7 @@ background-color: #9d9d9d;
                 left: 40px;
             ">About</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" id="app4">
           <li><a href="/signup" style="
             font-size: 17px;
           padding-right: 15px;
@@ -90,6 +90,31 @@ background-color: #9d9d9d;
       </div>
     </div>
   </nav>
+<script>
+  // logout
+  function logout(){
+        console.log("kuch b")
+        localStorage.removeItem("userInfo");
+        location.reload();
+      }
+  window.onload=function(){
+    if(localStorage.getItem("userInfo")){
+          document.getElementById("app4").innerHTML= `<li><a style="
+    font-size: 17px;
+  padding-right: 15px;
+"><span class="glyphicon glyphicon-user"></span>         `+JSON.parse(localStorage.getItem("userInfo")).FirstName+`</a></li>
+            <li><button onClick=logout() class="btn btn-danger btn-xs"style="
+    font-size: 17px;
+  padding-right: 20px;
+  padding-left: 1%;
+  
+  margin-top: 10%;
+  padding-left: 0px;
+"><span class="glyphicon glyphicon-log-out"></span> LogOut</button></li>`
+        }
+  }
+</script>
+
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
