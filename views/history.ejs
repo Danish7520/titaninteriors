@@ -122,12 +122,25 @@ background-color: #9d9d9d;
   padding-left: 0px;
 "><span class="glyphicon glyphicon-log-out"></span> LogOut</button></li>`
         }else{
+          $('#app4').hide();
             
             document.getElementById('app6').innerHTML =
-                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                    `
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="alert alert-danger alert-dismissable fade in">
                                 
-                                <strong>Please Login to view history</strong>
-                              </div>`;   
+                                <strong><center>Please Login to view history</center></strong>
+                              </div>`;  
+
         }
         console.log("onload")
         $.ajax({
@@ -172,26 +185,45 @@ background-color: #9d9d9d;
     }
 </script>
 
+<div class="row">
+  <div class="col-md-4"></div>
+  
+  <div class="col-md-4" id="app6">
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10" id="app6">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" id="app4">
+        <!-- <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; ">
+            <center><b>Invoice </b> <p>{{History.date}}</p></center>
+        </div>
             <div class="panel-body" id="app4">
                     <div  v-for="History in data">
                         <div class="panel panel-default">
                                 <center>
                                     <p  style="font-size:15px"><b> {{ History.name }} </b></p>
-                                    <p>{{History.date}}</p>
+                                    
                                 </center>
                             </div>
                             
                         </div>
                     </div>
-                </div>
+                </div> -->
     </div>
 <div class="col-md-1"></div>
 </div>
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
   <footer>
         <div class="container text-center">
           <p style="padding-top:40px;">Copyright &copy; Titan Interiors 2017</p>

@@ -22,6 +22,12 @@
     #panelbody{
         margin-right: 50px;
     }
+   
+    
+    #invoicebody{
+        font-weight: 700;
+        font-size: 17px;
+    }
 </style>
 
 <body style="
@@ -163,9 +169,10 @@ background-color: #9d9d9d;
                                 console.log("please login");
                                 $('#error2').show();
                         document.getElementById('error2').innerHTML =
-                                    `  <div class="alert alert-danger alert-dismissable fade in">
+                                    ` 
+                                    <div class="alert alert-danger alert-dismissable fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Please Login </strong>
+                                <strong><center>Please Login </center></strong>
                               </div>`;
                               setTimeout(function() {
                                 $('#error2').hide();
@@ -414,54 +421,103 @@ background-color: #9d9d9d;
                                     <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
+        
+        
+            
                     <div class="panel panel-default">
-                            <div class="panel-heading">Invoice</div>
-                            <div class="panel-body">
-                                <ul>
-                                    <li>
-                                        <p>Width : `+width+`</p>
-                                    </li>
-                                    <li>
-                                        <p>Height : `+height+`</p>
-                                    </li>
-                                    <li>
-                                        <p>Price : `+productselected.price+`/piece </p>
-                                    </li>
-                                    <li>
-                                        <p>No of Rolls : `+Math.ceil(no_of_rolls)+` </p>
-                                    </li>
-                                    <li>
-                                        <p>Cost : `+price+` </p>
-                                    </li>
-                                    <li>
-                                        <p>Wastage : 3 percent</p>
-                                    </li>
-                                    <li>
-                                        <p>No of Rolls with Wastage : `+Math.ceil(no_of_rolls2)+`</p>
-                                    </li>
-                                    <li>
-                                        <p>Total Cost : `+price2+`</p>
-                                    </li>
-                                </ul>
+                            <div class="panel-heading" style="font-size:20px; background:#A10029; color:#ffffff;" ><center><b>Invoice</b></center></div>
+                            <br>
+                            <div class="panel-body" id= "invoicebody">
                                 <div class="row">
-                                        <div class="col-md-2">
-                                           
-                                        </div>
-                                    <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary btn-xs" onclick = back() >Back</button>
-                                        </div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary btn-xs" onclick = save() >Save</button>
-                                            
+                                <div class="col-md-1"></div>
+                                <div class="col-md-8">
+                                <ul>
                                 
-                                        </div>
+                                    <li>
+                                        <p>Width : </p>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>Height : </p>
+                                    </li>
+                                
+                                    <li>
+                                        <p>Price : </p>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>No of Rolls :</p>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>Cost : </p>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>Wastage :</p>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>No of Rolls with Wastage : </p>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>Total Cost :</p>
+                                    </li>
+                                    
+                                </ul>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <div>
+                                    
+                                        <p> `+width+`</p>
+                                        
+                                    
+                                        <p> `+height+`</p>
+                                        
+                                    
+                                        <p>`+productselected.price+`/piece </p>
+                                        
+                                    
+                                        <p> `+Math.ceil(no_of_rolls)+` </p>
+                                        
+                                    
+                                        <p>`+price+` </p>
+                                    
+                                    
+                                        <p> 3 percent</p>
+                                        
+                                    
+                                        <p>`+Math.ceil(no_of_rolls2)+`</p>
+                                        
+                                
+                                        <p> `+price2+`</p>
+                                    
+                                </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                        <div class="col-md-8"></div>
+                                           
                                         <div class="col-md-2">
+                                    
+                                            <button type="button" class="btn btn-primary btn-md" onclick = back() >Back</button>
+                                        
+                                </div>
+                                <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary btn-md" onclick = save() >Save</button>
+                                            
+                                        </div>
+                                        
+                                        
                                             
                                         </div>
                                     </div>
                             </div>
-                          </div>
+                    </div>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -472,14 +528,20 @@ background-color: #9d9d9d;
                             
             
                         }
+                        
                     </script>
                   
     <div id="invoice">
        
     </div>
-    <div id="error2">
-
+    <div class="row">
+        
+        <div class="col-md-6" id="error2">
+            
+        </div>
+        <div class="col-md-6"></div>
     </div>
+    
 
     <!-- estimation-area -->
     <div class="row" id="estimationarea">
@@ -496,6 +558,7 @@ background-color: #9d9d9d;
                             <div class="panel-body" style="background:#A10029; color:white; font-size:15px;"><b>Select Type</b></div>
                         </div> -->
                         <p ><b>Select Type</b></p>
+                        <br>
                         <div class="radio-btn" style="font-size:12px; ">
                             <div class="radio">
                                 <label><input type="radio" name="optradio" onclick="Wall()" checked><b>Wall</b></label>
@@ -507,7 +570,10 @@ background-color: #9d9d9d;
                                 <label><input type="radio" name="optradio" onclick="Floor()"><b>Floor</b></label>
                             </div>
                         </div>
+                        <br>
+                        
                         <p><b>Dimensions</b></p>
+                        <br>
                         <div class="input-group">
                             <input type="number" min="0" class="form-control" placeholder="width" id="width">
                              <br>
@@ -515,12 +581,15 @@ background-color: #9d9d9d;
                             <input type="number" min="0" class="form-control" placeholder="Height" id="height">
                             <br>
                             <br>
-                            <div id="productselected">
+
+                            <div id="productselected" >
                                 
                             </div>
+                            <br>
                             <div>
                                 <input type="button" class="btn btn-info" onclick="estimation()" value="Enter">
                             </div>
+                            <br>
                             <!-- show error message -->
                             <div id="error">
 
@@ -588,7 +657,11 @@ background-color: #9d9d9d;
             
             <!--end estimation-area -->
 
-
+            <footer>
+                <div class="container text-center">
+                  <p style="padding-top:40px;">Copyright &copy; Titan Interiors 2017</p>
+                </div>
+              </footer>
 
 
 
