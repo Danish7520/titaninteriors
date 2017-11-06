@@ -22,6 +22,10 @@
 iframe[seamless] { 
     display: block;
 }
+#invoicebody{
+        font-weight: 700;
+        font-size: 17px;
+    }
 </style>
 
 <body style="
@@ -196,6 +200,88 @@ background-color: #9d9d9d;
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8" id="app4">
+        <div class="panel panel-default" v-for="History in data">
+            <div class="panel-heading"  style="background:#A10029; color:white; font-size:17px; "><center><b>Invoice </b> <p>{{History.date}}</p></center></div>
+            <div class="panel-body" id="invoicebody">
+              <div class="row" >
+                <div class="col-md-8">
+                    <ul >
+                        
+                            <li>
+                                <p>Width : </p>
+                            </li>
+                            
+                            <li>
+                                <p>Height : </p>
+                            </li>
+
+                            <li>
+                                <p>Name : </p>
+                            </li>
+                        
+                            <li>
+                                <p>Price : </p>
+                            </li>
+                            
+                            <li>
+                                <p>No of Rolls :</p>
+                            </li>
+                            
+                            <li>
+                                <p>Cost : </p>
+                            </li>
+                            
+                            <li>
+                                <p>Wastage :</p>
+                            </li>
+                            
+                            <li>
+                                <p>No of Rolls with Wastage : </p>
+                            </li>
+                            
+                            <li>
+                                <p>Total Cost :</p>
+                            </li>
+                            
+                        </ul>
+                </div>
+                <div class="col-md-4">
+                    <div >
+                        
+          
+                            
+                        
+                            <p> {{History.width}} </p>
+                            
+                        
+                            <p> {{History.height}} </p>
+                            
+                        
+                            <p> {{History.name}} </p>
+                            
+                        
+                            <p> {{History.price}} /piece </p>
+                        
+                        
+                            <p> {{History.no_of_rolls}} </p>
+                            
+                        
+                            <p> {{History.cost}} </p>
+                            
+                    
+                            <p> 3 Percent </p>
+
+                            
+                            <p> {{History.no_of_rolls2}} </p>
+
+                            
+                            <p> {{History.totalcost}} </p>
+                        
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
         <!-- <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; ">
             <center><b>Invoice </b> <p>{{History.date}}</p></center>
         </div>
@@ -212,7 +298,7 @@ background-color: #9d9d9d;
                     </div>
                 </div> -->
     </div>
-<div class="col-md-1"></div>
+<div class="col-md-2"></div>
 </div>
 
 <br>
