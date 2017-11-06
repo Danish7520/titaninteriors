@@ -125,6 +125,7 @@ background-color: #9d9d9d;
   margin-top: 10%;
   padding-left: 0px;
 "><span class="glyphicon glyphicon-log-out"></span> LogOut</button></li>`
+
         }else{
           $('#app4').hide();
             
@@ -147,7 +148,9 @@ background-color: #9d9d9d;
 
         }
         console.log("onload")
-        $.ajax({
+        
+        $.ajax({ 
+          
                                     type: "POST",
                                     url: "/searchhistory",
                                     data:{id:JSON.parse(localStorage.getItem('userInfo'))._id}
@@ -155,32 +158,39 @@ background-color: #9d9d9d;
                                 })
                                 .done(function (data) {
                                     console.log("this is data",data)
-                                    // for(var i=0;i<data.length;i++){
-                                    //     console.log("Day",data[i].date.getMonth())
-                                    //     // data[i].date=data[i].date.getDay() +"/"+data[i].date.getMonth()+"/"+data[i].date.getYear;
-                                    //     console.log(date[i]);
-                                    // }
-                                   
+                                  
+
                                         app4 = new Vue({
                                         el: '#app4',
                                         data: {
                                             data
                                         },
-                            //             methods: {
-                            //                 selectproduct: function (pess) {
-                            //                     document.getElementById('productselected').innerHTML =
-                            //         `  <div class="alert alert-danger alert-dismissable fade in">
-                            //            `+pess.name+`
-                            //   </div>`;
-                            //                     console.log(pess);
-                            //                     productselected = pess
-                            //                 }
-                                        // }
+                                         
+                            
                                     })
-                                   //   data= data.sort(function(a, b){
-//     return a.date-b.date
-// })
-                                    // create object of Vuejs
+                                    if(data==""){
+                                        $('#app4').hide();
+                                        
+                                document.getElementById('app6').innerHTML =
+                                    `<br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="alert alert-danger alert-dismissable fade in">
+                                
+                                <strong><center>Your history is empty</center></strong>
+                              </div>`;
+                                   }
+                                   else{
+
+                                   }
+ 
                                    
                                 })
                                 .fail(function () {
@@ -282,21 +292,7 @@ background-color: #9d9d9d;
               </div>
             </div>
           </div>
-        <!-- <div class="panel-heading" style="background:#A10029; color:white; font-size:17px; ">
-            <center><b>Invoice </b> <p>{{History.date}}</p></center>
-        </div>
-            <div class="panel-body" id="app4">
-                    <div  v-for="History in data">
-                        <div class="panel panel-default">
-                                <center>
-                                    <p  style="font-size:15px"><b> {{ History.name }} </b></p>
-                                    
-                                </center>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div> -->
+        
     </div>
 <div class="col-md-2"></div>
 </div>

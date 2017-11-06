@@ -45,13 +45,20 @@ module.exports = function(app, passport) {
 
  // searchhistory
  app.post('/searchhistory', function(req, res) {
-     console.log(req.body)
+     console.log("ggggggggggggggggggggggggggggggggg",req.body)
     users.findOne({_id:req.body.id},function(err,_user){
         if(err){
             console.log("error",err)
         }
         else{
-            res.json(_user.History.reverse())
+            try{
+                res.json(_user.History.reverse())
+            }
+            catch(E){
+                console.log("error occeur");
+                res.send("")
+            }
+            
         }
 
     })
@@ -238,6 +245,7 @@ module.exports = function(app, passport) {
                  }
              }
          })
+        
         
         })
     

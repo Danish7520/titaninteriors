@@ -134,10 +134,10 @@ background-color: #9d9d9d;
                         }
                         function save(){
                             if(localStorage.getItem("userInfo")){
-                                console.log("inside if",price)
+                                
                                 var data={id:JSON.parse(localStorage.getItem("userInfo"))._id, width:width,height:height,price:productselected.price,name:productselected.name,no_of_rolls:no_of_rolls,no_of_rolls2:no_of_rolls2,cost:price,totalcost:price2}
-                                // var data = {id:localStorage.getItem("userInfo")._id}
-                                console.log("abc",JSON.parse(localStorage.getItem("userInfo"))._id)
+                                
+                                console.log("datannnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",data)
                                 $.ajax({
                   type: "POST",
                   url: "/save",
@@ -405,13 +405,13 @@ background-color: #9d9d9d;
                                  three_percent = in_square_meter*0.03;
                                  in_square_meter2 = in_square_meter + three_percent;
                                  db_in_square_meter = db_width_in_meter*db_height_in_meter;
-                                 no_of_rolls = in_square_meter/db_in_square_meter;
-                                 no_of_rolls2 = in_square_meter2/db_in_square_meter;
+                                 no_of_rolls = Math.ceil(in_square_meter/db_in_square_meter);
+                                 no_of_rolls2 = Math.ceil(in_square_meter2/db_in_square_meter);
                                 
             
                                 
-                                 price = Math.ceil(no_of_rolls)*productselected.price;
-                                 price2 = Math.ceil(no_of_rolls2)*productselected.price;
+                                 price = no_of_rolls*productselected.price;
+                                 price2 = no_of_rolls2*productselected.price;
                                
                                 $("#estimationarea").hide();
                                 $("#invoice").show();
@@ -480,7 +480,7 @@ background-color: #9d9d9d;
                                         <p>`+productselected.price+`/piece </p>
                                         
                                     
-                                        <p> `+Math.ceil(no_of_rolls)+` </p>
+                                        <p> `+no_of_rolls+` </p>
                                         
                                     
                                         <p>`+price+` </p>
@@ -489,7 +489,7 @@ background-color: #9d9d9d;
                                         <p> 3 percent</p>
                                         
                                     
-                                        <p>`+Math.ceil(no_of_rolls2)+`</p>
+                                        <p>`+no_of_rolls2+`</p>
                                         
                                 
                                         <p> `+price2+`</p>
@@ -554,9 +554,7 @@ background-color: #9d9d9d;
                 </div>
                 <div class="panel-body">
                     <div class="estimate">
-                        <!-- <div class="panel panel-default">
-                            <div class="panel-body" style="background:#A10029; color:white; font-size:15px;"><b>Select Type</b></div>
-                        </div> -->
+                       
                         <p ><b>Select Type</b></p>
                         <br>
                         <div class="radio-btn" style="font-size:12px; ">
