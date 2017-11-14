@@ -279,7 +279,7 @@ background-color: #9d9d9d;
                         
                         // call when floor is selected
                         function Floor() {
-                            $('#height').attr('placeholder', 'Length'); // jqjuery to place lenth in lenth field when window is selected
+                            $('#height').attr('placeholder', 'Length in meter'); // jqjuery to place lenth in lenth field when window is selected
                             // ajax request to get data of floor when floor is selected
                             $.ajax({
                                     tyoe: "GET",
@@ -373,7 +373,7 @@ background-color: #9d9d9d;
                                 document.getElementById('error').innerHTML =
                                     `  <div class="alert alert-danger alert-dismissable fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>*Lenth should be greater than 0*</strong>
+                                <strong>*Length should be greater than 0*</strong>
                               </div>`;
                               setTimeout(function() {
                                 $('#error').hide();
@@ -573,10 +573,10 @@ background-color: #9d9d9d;
                         <p><b>Dimensions</b></p>
                         <br>
                         <div class="input-group">
-                            <input type="number" min="0" class="form-control" placeholder="width" id="width">
+                            <input type="number" min="0" class="form-control" placeholder="width in meter" id="width">
                              <br>
                              <br>
-                            <input type="number" min="0" class="form-control" placeholder="Height" id="height">
+                            <input type="number" min="0" class="form-control" placeholder="Height in meter" id="height">
                             <br>
                             <br>
 
