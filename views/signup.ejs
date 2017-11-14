@@ -95,6 +95,10 @@ background-color: #9d9d9d;
         </div>
     </nav>
 <script>
+    function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
     function handlesignup(){
         var firstname = $('#firstname').val();
         var lastname = $('#lastname').val();
@@ -110,6 +114,7 @@ background-color: #9d9d9d;
                                 $('#errorfirstname').hide();
                               }, 2000);
             }
+           
             else if(lastname ==""){
                 $('#errorlastname').show();
                 document.getElementById('errorlastname').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
@@ -124,7 +129,17 @@ background-color: #9d9d9d;
                 $('#erroremail').show();
                 document.getElementById('erroremail').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>*Password is required*</strong>
+                    <strong>*Email is required*</strong>
+                  </div>`;
+                  setTimeout(function() {
+                                $('#erroremail').hide();
+                              }, 2000);
+            } else if(!validateEmail(email))
+            {
+                $('#erroremail').show();
+                document.getElementById('erroremail').innerHTML=`  <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>*Enter proper Email*</strong>
                   </div>`;
                   setTimeout(function() {
                                 $('#erroremail').hide();
