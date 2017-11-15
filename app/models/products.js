@@ -7,6 +7,7 @@ var productSchema=new Schema({
     Categories: [
 {
     name:"String",
+    no_of:"String",
     image:"String",
     price:"number",
     width:"number",
