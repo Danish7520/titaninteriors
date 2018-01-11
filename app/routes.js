@@ -140,6 +140,7 @@ module.exports = function(app, passport) {
         users.findOneAndUpdate({_id:req.body.id},{$push:{History:{           
         width:req.body.width,
         height:req.body.height,
+        type:req.body.type,
         price:req.body.price,
         name:req.body.name,
         cost:req.body.cost,

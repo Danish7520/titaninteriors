@@ -211,30 +211,30 @@ background-color: #9d9d9d;
     <div class="col-md-2"></div>
     <div class="col-md-8" id="app4">
         <div class="panel panel-default" v-for="History in data">
-            <div class="panel-heading"  style="background:#A10029; color:white; font-size:17px; "><center><b>Estimate </b> <p>{{History.date}}</p></center></div>
+            <div class="panel-heading"  style="background:#A10029; color:white; font-size:17px; "><center><b>Esimate </b> <p>{{History.date}}</p></center></div>
             <div class="panel-body" id="invoicebody">
               <div class="row" >
                 <div class="col-md-8">
                     <ul >
                         
                             <li>
-                                <p>Width : </p>
+                                <p>Width in meter: </p>
                             </li>
                             
                             <li>
-                                <p>Height : </p>
+                                <p>Height in meter: </p>
                             </li>
 
                             <li>
-                                <p>Name : </p>
+                                <p>Name of product: </p>
                             </li>
                         
                             <li>
-                                <p>Price : </p>
+                                <p>Price per {{History.type}}: </p>
                             </li>
                             
                             <li>
-                                <p>No of Rolls :</p>
+                                <p>No of {{History.type}} :</p>
                             </li>
                             
                             <li>
@@ -246,7 +246,7 @@ background-color: #9d9d9d;
                             </li>
                             
                             <li>
-                                <p>No of Rolls with Wastage : </p>
+                                <p>No of {{History.type}} with Wastage : </p>
                             </li>
                             
                             <li>
@@ -270,7 +270,7 @@ background-color: #9d9d9d;
                             <p> {{History.name}} </p>
                             
                         
-                            <p> {{History.price}} /piece </p>
+                            <p> {{History.price}}  </p>
                         
                         
                             <p> {{History.no_of_rolls}} </p>

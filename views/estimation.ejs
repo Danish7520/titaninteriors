@@ -135,7 +135,7 @@ background-color: #9d9d9d;
                         function save(){
                             if(localStorage.getItem("userInfo")){
                                 
-                                var data={id:JSON.parse(localStorage.getItem("userInfo"))._id, width:width,height:height,price:productselected.price,name:productselected.name,no_of_rolls:no_of_rolls,no_of_rolls2:no_of_rolls2,cost:price,totalcost:price2}
+                                var data={id:JSON.parse(localStorage.getItem("userInfo"))._id, width:width,height:height,price:productselected.price,name:productselected.name,no_of_rolls:no_of_rolls,no_of_rolls2:no_of_rolls2,cost:price,totalcost:price2,type:productselected.type}
                                 
                                 console.log("datannnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",data)
                                 $.ajax({
@@ -317,7 +317,7 @@ background-color: #9d9d9d;
                             else if (height == "") {
                                 $('#error').show();
                                 // if for height
-                                if ($('#height')[0].placeholder == "Height") {
+                                if ($('#height')[0].placeholder == "Height in meter") {
                                     document.getElementById('error').innerHTML =
                                         `  <div class="alert alert-danger alert-dismissable fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -343,26 +343,28 @@ background-color: #9d9d9d;
                             }
             
                             // if width is less than 0 show this error
-                            else if (width < 0) {
+                            else if (width < 1 || width >9999) {
                                 $('#error').show();
                                 document.getElementById('error').innerHTML =
                                     `  <div class="alert alert-danger alert-dismissable fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>*Width should be greater than 0</strong>
+                                <strong>*Width should be greater than 0 and less then 10000</strong>
                               </div>`;
                               setTimeout(function() {
                                 $('#error').hide();
                               }, 2000);
                             }
+
+                           
             
                             // if height is less than 0 show this error message
-                            else if (height < 0) {
+                            else if (height < 1 || height > 9999) {
                                 $('#error').show();
-                                if ($('#height')[0].placeholder == "Height"){
+                                if ($('#height')[0].placeholder == "Height in meter"){
                                 document.getElementById('error').innerHTML =
                                     `  <div class="alert alert-danger alert-dismissable fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>*Height should be greater than 0</strong>
+                                <strong>*Height should be greater than 0 and less then 10000*</strong>
                               </div>`;
                               setTimeout(function() {
                                 $('#error').hide();
@@ -373,7 +375,7 @@ background-color: #9d9d9d;
                                 document.getElementById('error').innerHTML =
                                     `  <div class="alert alert-danger alert-dismissable fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>*Length should be greater than 0*</strong>
+                                <strong>*Length should be greater than 0 and less than 10000*</strong>
                               </div>`;
                               setTimeout(function() {
                                 $('#error').hide();
@@ -434,19 +436,19 @@ background-color: #9d9d9d;
                                 <ul>
                                 
                                     <li>
-                                        <p>Width : </p>
+                                        <p>Width in meter: </p>
                                     </li>
                                     
                                     <li>
-                                        <p>Height : </p>
+                                        <p>Height in meter : </p>
                                     </li>
                                 
                                     <li>
-                                        <p>Price : </p>
+                                        <p>Price per `+productselected.type+` : </p>
                                     </li>
                                     
                                     <li>
-                                        <p>No of Rolls :</p>
+                                        <p>No of `+productselected.type+` :</p>
                                     </li>
                                     
                                     <li>
@@ -458,7 +460,7 @@ background-color: #9d9d9d;
                                     </li>
                                     
                                     <li>
-                                        <p>No of Rolls with Wastage : </p>
+                                        <p>No of `+productselected.type+` with Wastage : </p>
                                     </li>
                                     
                                     <li>
@@ -477,7 +479,7 @@ background-color: #9d9d9d;
                                         <p> `+height+`</p>
                                         
                                     
-                                        <p>`+productselected.price+`/piece </p>
+                                        <p>`+productselected.price+` </p>
                                         
                                     
                                         <p> `+no_of_rolls+` </p>
@@ -561,9 +563,11 @@ background-color: #9d9d9d;
                             <div class="radio">
                                 <label><input type="radio" name="optradio" onclick="Wall()" checked><b>Wall</b></label>
                             </div>
-                            <div class="radio">
+                            
+                            
+                            <!-- <div class="radio">
                                 <label><input type="radio" name="optradio" onclick="Window()"><b>Window</b></label>
-                            </div>
+                            </div> -->
                             <div class="radio">
                                 <label><input type="radio" name="optradio" onclick="Floor()"><b>Floor</b></label>
                             </div>
@@ -573,10 +577,10 @@ background-color: #9d9d9d;
                         <p><b>Dimensions</b></p>
                         <br>
                         <div class="input-group">
-                            <input type="number" min="0" class="form-control" placeholder="width in meter" id="width">
+                            <input type="number" min="1"  class="form-control" placeholder="width in meter" id="width">
                              <br>
                              <br>
-                            <input type="number" min="0" class="form-control" placeholder="Height in meter" id="height">
+                            <input type="number" min="1"  class="form-control" placeholder="Height in meter" id="height">
                             <br>
                             <br>
 
@@ -633,7 +637,7 @@ background-color: #9d9d9d;
                                             <div v-bind:id="Category._id" class="panel-collapse collapse">
                                                 <div class="panel-body">
                                                     <img v-bind:src="Category.image" alt="Lights" style="width:100%">
-                                                    <p><b>Price per piece <br>{{ Category.price }} RS</b></p>
+                                                    <p><b>Price per {{ Category.type }} <br>{{ Category.price }} RS</b></p>
 
                                                     <button type="button" class="btn btn-primary btn-xs" v-on:click="selectproduct(Category)">Select Product</button>
                                                 </div>
