@@ -22,7 +22,7 @@ Clone the repo
    
    $ install python
 
-   $ go to example folder
+   $ go to blueprint3d/example folder
 
    $ npm install 
 
